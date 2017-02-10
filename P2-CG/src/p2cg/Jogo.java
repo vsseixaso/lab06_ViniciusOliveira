@@ -7,6 +7,8 @@ import exceptions.ValorNegativoException;
 
 public class Jogo {
 
+	private static final String NL = "\n";
+	
 	private String nome;
 	private double preco;
 	private int bestScore;
@@ -34,20 +36,25 @@ public class Jogo {
 	
 	public int registraJogada(int score, boolean zerou) {
 		int x2p = 0;
-		int pontosLuta;
 		if (score > bestScore)
-			if (tipo.equals(tipo.LUTA)) {
+			if (tipo.equals(Tipo.LUTA)) {
+				
 				if (score <= 100000)
 					bestScore = score;
-					
+					double x2pLutaDouble = score/1000;
+					int x2pLuta = (int) x2pLutaDouble;
+					x2p += x2pLuta;
+			
 			} else bestScore = score;	
 			
-		if (zerou == true)
+		if (zerou)
 			vezesZeradas++;
+			if (tipo.equals(Tipo.PLATAFORMA))
+				x2p += 20;
 		
-		if (tipo.equals(tipo.RPG))
-			x2p += 10;			
-			
+		if (tipo.equals(Tipo.RPG))
+			x2p += 10;
+		
 		return x2p;
 	}
 
@@ -79,12 +86,50 @@ public class Jogo {
 		return jogabilidade;
 	}
 
+	public Tipo getTipo() {
+		return tipo;
+	}
+
 	@Override
 	public String toString() {
-		return "Jogo [nome=" + nome + ", preco=" + preco + ", bestScore="
-				+ bestScore + ", vezesJogadas=" + vezesJogadas
-				+ ", vezesZeradas=" + vezesZeradas + ", jogabilidade="
-				+ jogabilidade + "]";
+		return "+ " + nome + " - " + tipo + ":" + NL
+				+ "==> Jogou " + vezesJogadas + " vez(es)" + NL
+				+ "==> Zerou " + vezesZeradas + " vez(es)" + NL
+				+ "Maior score: " + bestScore + NL + NL;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((jogabilidade == null) ? 0 : jogabilidade.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Jogo other = (Jogo) obj;
+		if (jogabilidade == null) {
+			if (other.jogabilidade != null)
+				return false;
+		} else if (!jogabilidade.equals(other.jogabilidade))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (tipo != other.tipo)
+			return false;
+		return true;
 	}
 	
 }
