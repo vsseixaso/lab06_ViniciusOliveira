@@ -13,4 +13,8 @@ public class Noob extends Usuario {
 		return DESCONTO;
 	}	
 	
+	public void x2pCompra(Jogo jogo) {
+		x2p += (10 * jogo.getPreco());
+	}
+	
 }

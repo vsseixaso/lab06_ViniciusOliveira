@@ -12,5 +12,9 @@ public class Veterano extends Usuario {
 	public double getDesconto() {
 		return DESCONTO;
 	}
+	
+	public void x2pCompra(Jogo jogo) {
+		x2p += (15 * jogo.getPreco());
+	}
 
 }

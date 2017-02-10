@@ -37,7 +37,10 @@ public abstract class Usuario {
 			throw new ValorException("Dinheiro insuficiente para comprar esse jogo.");
 		jogos.add(jogo);
 		dinheiro -= preco;
+		x2pCompra(jogo);
 	}
+
+	public abstract void x2pCompra(Jogo jogo);
 
 	public abstract double getDesconto();
 	
