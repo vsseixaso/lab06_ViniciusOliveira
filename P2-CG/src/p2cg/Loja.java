@@ -22,25 +22,29 @@ public class Loja {
 		return null;
 	}
 	
-	public void adicionaDinheiro(String id, double quantia) {
-		Usuario user = null;
-		if (pesquisaUsuario(id) != null) {
-			user = pesquisaUsuario(id);
-			user.setDinheiro(user.getDinheiro()+quantia);
-		}
+	public void adicionaDinheiro(String id, double quantia) throws Exception {
+		if (pesquisaUsuario(id) == null)
+			throw new Exception("O usuário não existe.");
+		Usuario user = pesquisaUsuario(id);
+		user.addDinheiro(quantia);
 	}
 		
-	/*
-	 * PROBLEMA DO MÉTODO "vendeJogo(...)":
-	 * Não analisa se o usuário é Noob ou Veterano
-	 * para dar o desconto.
-	 */
 	public void vendeJogo(String id, Jogo jogo) throws Exception {
-		Usuario user = null;
-		if (pesquisaUsuario(id) != null) {
-			user = pesquisaUsuario(id);
-			user.compraJogo(jogo);
-		}
+		if (pesquisaUsuario(id) == null)
+			throw new Exception("O usuário não existe.");
+		Usuario user = pesquisaUsuario(id);
+		user.compraJogo(jogo);
+	}
+	
+	public void upgrade(String id) throws Exception {
+		if (pesquisaUsuario(id) == null)
+			throw new Exception("O usuário não existe.");
+		Usuario user = pesquisaUsuario(id);
+		if (user.getCategoria() instanceof Veterano)
+			throw new Exception("O usuário já é Veterano.");
+		if (user.getX2p() < 1000)
+			throw new Exception("O usuário não tem x2p suficiente.");
+		user.setCategoria();
 	}
 
 	public ArrayList<Usuario> getUsuarios() {

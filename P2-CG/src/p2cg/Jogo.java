@@ -22,9 +22,9 @@ public class Jogo {
 	 */
 	public Jogo(String nome, double preco, HashSet<Jogabilidade> jogabilidade, Tipo tipo) throws Exception {
 		if (nome == null || nome.trim().equals(""))
-			throw new ParametroVazioException("Nome n√£o pode ser nulo ou vazio.");
+			throw new Exception("Nome n„o pode ser nulo ou vazio.");
 		if (preco < 0)
-			throw new ValorNegativoException("Pre√ßo n√£o pode ser menor que zero.");
+			throw new Exception("PreÁo n„o pode ser menor que zero.");
 		this.nome = nome;
 		this.preco = preco;
 		this.jogabilidade = jogabilidade;
@@ -34,17 +34,21 @@ public class Jogo {
 		vezesZeradas = 0;
 	}
 	
-	public int registraJogada(int score, boolean zerou) {
+	public int registraJogada(int score, boolean zerou) throws Exception {
+		if (this == null)
+			throw new Exception("O jogo n„o foi inicializado.");
+		
 		int x2p = 0;
+		vezesJogadas++;
 		if (score > bestScore)
 			if (tipo.equals(Tipo.LUTA)) {
 				
-				if (score <= 100000)
+				if (score <= 100000) {
 					bestScore = score;
 					double x2pLutaDouble = score/1000;
 					int x2pLuta = (int) x2pLutaDouble;
 					x2p += x2pLuta;
-			
+				}
 			} else bestScore = score;	
 			
 		if (zerou)
@@ -95,14 +99,13 @@ public class Jogo {
 		return "+ " + nome + " - " + tipo + ":" + NL
 				+ "==> Jogou " + vezesJogadas + " vez(es)" + NL
 				+ "==> Zerou " + vezesZeradas + " vez(es)" + NL
-				+ "Maior score: " + bestScore + NL + NL;
+				+ "==> Maior score: " + bestScore + NL + NL;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((jogabilidade == null) ? 0 : jogabilidade.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		return result;
@@ -117,11 +120,6 @@ public class Jogo {
 		if (getClass() != obj.getClass())
 			return false;
 		Jogo other = (Jogo) obj;
-		if (jogabilidade == null) {
-			if (other.jogabilidade != null)
-				return false;
-		} else if (!jogabilidade.equals(other.jogabilidade))
-			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;

@@ -6,7 +6,7 @@ import exceptions.ParametroVazioException;
 import exceptions.ValorException;
 import exceptions.ValorNegativoException;
 
-public abstract class Usuario {
+public class Usuario {
 
 	private static final String NL = "\n";
 	
@@ -14,36 +14,33 @@ public abstract class Usuario {
 	private String id;
 	private ArrayList<Jogo> jogos;
 	private double dinheiro;
-	protected int x2p;
+	private Categoria categoria;
+	private int x2p;
 	
 	public Usuario(String nome, String id) throws Exception {
 		if (nome == null || nome.trim().equals(""))
 			throw new ParametroVazioException("Nome do usuário não pode ser nulo ou vazio.");
 		if (id == null || id.trim().equals(""))
 			throw new ParametroVazioException("ID do usuário não pode ser nulo ou vazio.");
-		if (dinheiro < 0)
-			throw new ValorNegativoException("Dinheiro do usuário não pode ser menor que zero.");
 		this.nome = nome;
 		this.id = id;
+		categoria = new Noob();
+		x2p = 0;
 		dinheiro = 0;
 		jogos = new ArrayList<Jogo>();
 	}
 	
 	protected void compraJogo(Jogo jogo) throws Exception {
-		double preco = jogo.getPreco() - (jogo.getPreco() * getDesconto());
+		double preco = jogo.getPreco() - (jogo.getPreco() * categoria.getDesconto());
 		if (procuraJogo(jogo.getNome()) != null)
 			throw new JogoException("O usuário já tem esse jogo.");
 		if (preco > dinheiro)
 			throw new ValorException("Dinheiro insuficiente para comprar esse jogo.");
 		jogos.add(jogo);
 		dinheiro -= preco;
-		x2pCompra(jogo);
+		x2p += categoria.x2pCompra(jogo);
 	}
 
-	public abstract void x2pCompra(Jogo jogo);
-
-	public abstract double getDesconto();
-	
 	public Jogo procuraJogo(String nome) {
 		Jogo jogo = null;
 		for (int i = 0; i < jogos.size(); i++) {
@@ -53,9 +50,9 @@ public abstract class Usuario {
 		return jogo;
 	}
 	
-	public void registraJogada(String nomeDoJogo, int score, boolean zerou) {
+	public void registraJogada(String nomeDoJogo, int score, boolean zerou) throws Exception {
 		Jogo jogo = procuraJogo(nomeDoJogo);
-		x2p += jogo.registraJogada(score, zerou);
+		x2p += (jogo.registraJogada(score, zerou));
 	}
 	
 	public String getNome() {
@@ -78,18 +75,30 @@ public abstract class Usuario {
 		return dinheiro;
 	}
 
-	public void setDinheiro(double dinheiro) {
-		this.dinheiro = dinheiro;
-	}
-
-	public int getX2p() {
-		return x2p;
+	public void addDinheiro(double dinheiro) {
+		this.dinheiro += dinheiro;
 	}
 
 	public ArrayList<Jogo> getJogos() {
 		return jogos;
 	}
 	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria() {
+		this.categoria = new Veterano();
+	}
+
+	public int getX2p() {
+		return x2p;
+	}
+
+	public void setX2p(int x2p) {
+		this.x2p = x2p;
+	}
+
 	public double precoTotal() {
 		double precoTotal = 0;
 		for (Jogo jogo : jogos) {

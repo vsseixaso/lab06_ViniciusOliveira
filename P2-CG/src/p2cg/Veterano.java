@@ -1,20 +1,17 @@
 package p2cg;
 
-public class Veterano extends Usuario {
+public class Veterano extends Categoria {
 
 	private static final double DESCONTO = 0.2;
-	
-	public Veterano(String nome, String id) throws Exception {
-		super(nome, id);
-		x2p = 1000;
-	}
 
 	public double getDesconto() {
 		return DESCONTO;
 	}
 	
-	public void x2pCompra(Jogo jogo) {
-		x2p += (15 * jogo.getPreco());
+	public int x2pCompra(Jogo jogo) {
+		int x2p;
+		x2p = (int) (15 * jogo.getPreco());
+		return x2p;
 	}
 
 }

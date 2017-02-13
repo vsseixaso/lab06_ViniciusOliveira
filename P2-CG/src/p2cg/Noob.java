@@ -1,20 +1,17 @@
 package p2cg;
 
-public class Noob extends Usuario {
+public class Noob extends Categoria {
 	
 	private static final double DESCONTO = 0.1;
-	
-	public Noob(String nome, String id) throws Exception {
-		super(nome, id);
-		x2p = 0;
-	}
 
 	public double getDesconto() {
 		return DESCONTO;
 	}	
 	
-	public void x2pCompra(Jogo jogo) {
-		x2p += (10 * jogo.getPreco());
+	public int x2pCompra(Jogo jogo) {
+		int x2p;
+		x2p = (int) (10 * jogo.getPreco());
+		return x2p;
 	}
 	
 }
