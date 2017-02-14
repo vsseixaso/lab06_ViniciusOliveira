@@ -13,5 +13,10 @@ public class Veterano extends Categoria {
 		x2p = (int) (15 * jogo.getPreco());
 		return x2p;
 	}
+	
+	@Override
+	public String toString() {
+		return "Veterano";
+	}
 
 }

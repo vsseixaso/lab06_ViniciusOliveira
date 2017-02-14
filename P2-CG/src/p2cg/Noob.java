@@ -13,5 +13,10 @@ public class Noob extends Categoria {
 		x2p = (int) (10 * jogo.getPreco());
 		return x2p;
 	}
+
+	@Override
+	public String toString() {
+		return "Noob";
+	}
 	
 }

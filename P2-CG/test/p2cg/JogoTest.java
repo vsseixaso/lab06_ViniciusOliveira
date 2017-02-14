@@ -8,11 +8,11 @@ import org.junit.Test;
 
 public class JogoTest {
 
-	private Jogo jogo1;
-	private HashSet<Jogabilidade> jogabilidade1;
+	Jogo jogo1;
+	HashSet<Jogabilidade> jogabilidade1;
 	
 	@Before
-	public void criaJogos() throws Exception {
+	public void criaJogo() throws Exception {
 		jogabilidade1 = new HashSet<>();
 		jogabilidade1.add(Jogabilidade.Offline);
 		jogo1 = new Jogo("Super Mario", 18000, jogabilidade1, Tipo.PLATAFORMA);
@@ -25,7 +25,7 @@ public class JogoTest {
 			Assert.fail("Lancamento de Exception com Nome nulo");
 
 		} catch (Exception e) {
-			Assert.assertEquals("Nome n„o pode ser nulo ou vazio.", e.getMessage());
+			Assert.assertEquals("Nome n√£o pode ser nulo ou vazio.", e.getMessage());
 		}
 		
 		try {
@@ -33,15 +33,15 @@ public class JogoTest {
 			Assert.fail("Lancamento de Exception com Nome vazio");
 
 		} catch (Exception e) {
-			Assert.assertEquals("Nome n„o pode ser nulo ou vazio.", e.getMessage());
+			Assert.assertEquals("Nome n√£o pode ser nulo ou vazio.", e.getMessage());
 		}
 		
 		try {
 			Jogo jogo3 = new Jogo("Super Mario", -1, jogabilidade1, Tipo.PLATAFORMA);
-			Assert.fail("Lancamento de Exception com PreÁo negativo");
+			Assert.fail("Lancamento de Exception com Pre√ßo negativo");
 
 		} catch (Exception e) {
-			Assert.assertEquals("PreÁo n„o pode ser menor que zero.", e.getMessage());
+			Assert.assertEquals("Pre√ßo n√£o pode ser menor que zero.", e.getMessage());
 		}
 	}
 

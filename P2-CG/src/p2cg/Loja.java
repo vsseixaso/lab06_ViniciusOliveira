@@ -1,6 +1,7 @@
 package p2cg;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.xml.crypto.dsig.spec.ExcC14NParameterSpec;
 
@@ -9,6 +10,7 @@ public class Loja {
 	private static final String NL = "\n";
 	
 	private ArrayList<Usuario> usuarios;
+	private Jogo jogo;
 	
 	public void adicionaUsuario(Usuario user) {
 		usuarios.add(user);
@@ -24,26 +26,27 @@ public class Loja {
 	
 	public void adicionaDinheiro(String id, double quantia) throws Exception {
 		if (pesquisaUsuario(id) == null)
-			throw new Exception("O usu·rio n„o existe.");
+			throw new Exception("O usu√°rio n√£o existe.");
 		Usuario user = pesquisaUsuario(id);
 		user.addDinheiro(quantia);
 	}
 		
-	public void vendeJogo(String id, Jogo jogo) throws Exception {
+	public void vendeJogo(String id, String nomeJogo, double preco, HashSet<Jogabilidade> jogabilidade, Tipo tipo) throws Exception {
 		if (pesquisaUsuario(id) == null)
-			throw new Exception("O usu·rio n„o existe.");
+			throw new Exception("O usu√°rio n√£o existe.");
 		Usuario user = pesquisaUsuario(id);
+		jogo = new Jogo(nomeJogo, preco, jogabilidade, tipo);
 		user.compraJogo(jogo);
 	}
 	
 	public void upgrade(String id) throws Exception {
 		if (pesquisaUsuario(id) == null)
-			throw new Exception("O usu·rio n„o existe.");
+			throw new Exception("O usu√°rio n√£o existe.");
 		Usuario user = pesquisaUsuario(id);
 		if (user.getCategoria() instanceof Veterano)
-			throw new Exception("O usu·rio j· È Veterano.");
+			throw new Exception("O usu√°rio j√° √© Veterano.");
 		if (user.getX2p() < 1000)
-			throw new Exception("O usu·rio n„o tem x2p suficiente.");
+			throw new Exception("O usu√°rio n√£o tem x2p suficiente.");
 		user.setCategoria();
 	}
 

@@ -17,14 +17,21 @@ public class Jogo {
 	private HashSet<Jogabilidade> jogabilidade;
 	private Tipo tipo;
 	
-	/**
-	 * Construtor do jogo.
+	/** 
+	 * @param nome
+	 * @param preco
+	 * @param jogabilidade
+	 * @param tipo
+	 * @throws Exception
+	 * 
+	 * Construtor que recebe os parâmetros que definem o jogo e lança exceção para o parâmetro
+	 * 'nome' (caso esteja nulo ou vazio) e para o parâmetro 'preco' (caso seja menor que zero).
 	 */
 	public Jogo(String nome, double preco, HashSet<Jogabilidade> jogabilidade, Tipo tipo) throws Exception {
 		if (nome == null || nome.trim().equals(""))
-			throw new Exception("Nome n�o pode ser nulo ou vazio.");
+			throw new Exception("Nome não pode ser nulo ou vazio.");
 		if (preco < 0)
-			throw new Exception("Pre�o n�o pode ser menor que zero.");
+			throw new Exception("Preço não pode ser menor que zero.");
 		this.nome = nome;
 		this.preco = preco;
 		this.jogabilidade = jogabilidade;
@@ -34,9 +41,17 @@ public class Jogo {
 		vezesZeradas = 0;
 	}
 	
+	/**
+	 * @param score
+	 * @param zerou
+	 * @return
+	 * @throws Exception
+	 * 
+	 * 
+	 */
 	public int registraJogada(int score, boolean zerou) throws Exception {
 		if (this == null)
-			throw new Exception("O jogo n�o foi inicializado.");
+			throw new Exception("O jogo não foi inicializado.");
 		
 		int x2p = 0;
 		vezesJogadas++;

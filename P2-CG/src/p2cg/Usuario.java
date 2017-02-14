@@ -110,12 +110,12 @@ public class Usuario {
 	@Override
 	public String toString() {
 		String stringCompleta = id + NL + nome + " - Jogador "
-				+ getClass() + NL	+ "Lista de Jogos:" + NL;		
+				+ categoria.toString() + NL	+ "Lista de Jogos:" + NL;		
 		
 		for (Jogo jogo : jogos) {
 			stringCompleta += jogo.toString();
 		}
-		stringCompleta += "Total de preço dos jogos: R$ " + precoTotal() + NL + NL
+		stringCompleta += "Total de preÃ§o dos jogos: R$ " + precoTotal() + NL + NL
 				+ "--------------------------------------------";
 		
 		return stringCompleta;
