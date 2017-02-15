@@ -117,7 +117,7 @@ public class UsuarioTest {
 				+ "\n"
 				+ "Total de preço dos jogos: R$ 50000.0\n"
 				+ "\n"
-				+ "--------------------------------------------";
+				+ "--------------------------------------------\n\n";
 		
 		Assert.assertEquals(esperado, user.toString());
 	}

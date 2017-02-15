@@ -17,6 +17,13 @@ public class Usuario {
 	private Categoria categoria;
 	private int x2p;
 	
+	/**
+	 * cria o usuário e seta sua categoria como Noob e o dinheiro como 0
+	 * 
+	 * @param nome . nome do usuario
+	 * @param id . id do usuario
+	 * @throws Exception . lança exceção para nome e id nulo/vazio
+	 */
 	public Usuario(String nome, String id) throws Exception {
 		if (nome == null || nome.trim().equals(""))
 			throw new ParametroVazioException("Nome do usuÃ¡rio nÃ£o pode ser nulo ou vazio.");
@@ -30,6 +37,13 @@ public class Usuario {
 		jogos = new ArrayList<Jogo>();
 	}
 	
+	/**
+	 * operação de compra de jogo, adiciona na lista do usuario, diminui do seu dinheiro o preco do jogo menos o desconto
+	 * e adiciona x2p no seu perfil
+	 * 
+	 * @param jogo . recebe o jogo já criado
+	 * @throws Exception . lança exceção caso o usuário ja tenha o jogo ou caso não tenha dinheiro suficiente
+	 */
 	protected void compraJogo(Jogo jogo) throws Exception {
 		double preco = jogo.getPreco() - (jogo.getPreco() * categoria.getDesconto());
 		if (procuraJogo(jogo.getNome()) != null)
@@ -41,6 +55,12 @@ public class Usuario {
 		x2p += categoria.x2pCompra(jogo);
 	}
 
+	/**
+	 * procura um jogo na lista de jogos do usuário
+	 * 
+	 * @param nome . nome do jogo que quer encontrar
+	 * @return . retorna o jogo ou nulo (caso não exista na lista)
+	 */
 	public Jogo procuraJogo(String nome) {
 		Jogo jogo = null;
 		for (int i = 0; i < jogos.size(); i++) {
@@ -50,6 +70,14 @@ public class Usuario {
 		return jogo;
 	}
 	
+	/**
+	 * registra a rodada do usuário em um determinado jogo
+	 * 
+	 * @param nomeDoJogo . nome do jogo que irá registrar a jogada
+	 * @param score . pontuação feita na rodada
+	 * @param zerou . booleano que diz se o usuário zerou o jogo (true) ou nao (false)
+	 * @throws Exception . exceção lançada pelo método chamado na classe Jogo
+	 */
 	public void registraJogada(String nomeDoJogo, int score, boolean zerou) throws Exception {
 		Jogo jogo = procuraJogo(nomeDoJogo);
 		x2p += (jogo.registraJogada(score, zerou));
@@ -116,7 +144,7 @@ public class Usuario {
 			stringCompleta += jogo.toString();
 		}
 		stringCompleta += "Total de preÃ§o dos jogos: R$ " + precoTotal() + NL + NL
-				+ "--------------------------------------------";
+				+ "--------------------------------------------" + NL + NL;
 		
 		return stringCompleta;
 	}
@@ -129,6 +157,9 @@ public class Usuario {
 		return result;
 	}
 
+	/**
+	 * define a igualdade de usuarios pelo id
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

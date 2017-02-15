@@ -18,14 +18,14 @@ public class Jogo {
 	private Tipo tipo;
 	
 	/** 
-	 * @param nome
-	 * @param preco
-	 * @param jogabilidade
-	 * @param tipo
-	 * @throws Exception
-	 * 
 	 * Construtor que recebe os parÃ¢metros que definem o jogo e lanÃ§a exceÃ§Ã£o para o parÃ¢metro
 	 * 'nome' (caso esteja nulo ou vazio) e para o parÃ¢metro 'preco' (caso seja menor que zero).
+	 * 
+	 * @param nome . do jogo
+	 * @param preco . do jogo
+	 * @param jogabilidade . pode ter mais de uma jogabilidade, definidas com Enum em "Jogabilidade"
+	 * @param tipo . apenas um é possível, definido com Enum em "Tipo"
+	 * @throws Exception . lança exceções para nome nulo/vazio e preco < 0
 	 */
 	public Jogo(String nome, double preco, HashSet<Jogabilidade> jogabilidade, Tipo tipo) throws Exception {
 		if (nome == null || nome.trim().equals(""))
@@ -42,12 +42,12 @@ public class Jogo {
 	}
 	
 	/**
-	 * @param score
-	 * @param zerou
-	 * @return
-	 * @throws Exception
+	 * registra a atual jogada feita pelo usuario no jogo this e retorna o x2p adquirido
 	 * 
-	 * 
+	 * @param score . pontuação na jogada atual
+	 * @param zerou . booleano, true zerou o jogo, false não zerou
+	 * @return . retorna o x2p adquirido com a jogada atual
+	 * @throws Exception . lança exceção caso o jogo não foi criado ainda
 	 */
 	public int registraJogada(int score, boolean zerou) throws Exception {
 		if (this == null)
@@ -126,6 +126,9 @@ public class Jogo {
 		return result;
 	}
 
+	/**
+	 * define a igualdade de jogos pelo nome e tipo
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -9,8 +9,7 @@ public class Loja {
 
 	private static final String NL = "\n";
 	
-	private ArrayList<Usuario> usuarios;
-	private Jogo jogo;
+	private ArrayList<Usuario> usuarios = new ArrayList<>();
 	
 	public void adicionaUsuario(Usuario user) {
 		usuarios.add(user);
@@ -35,7 +34,7 @@ public class Loja {
 		if (pesquisaUsuario(id) == null)
 			throw new Exception("O usuário não existe.");
 		Usuario user = pesquisaUsuario(id);
-		jogo = new Jogo(nomeJogo, preco, jogabilidade, tipo);
+		Jogo jogo = new Jogo(nomeJogo, preco, jogabilidade, tipo);
 		user.compraJogo(jogo);
 	}
 	
