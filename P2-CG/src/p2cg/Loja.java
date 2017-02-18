@@ -11,10 +11,21 @@ public class Loja {
 	
 	private ArrayList<Usuario> usuarios = new ArrayList<>();
 	
+	/**
+	 * adiciona um usuario na lista de usuarios
+	 * 
+	 * @param user . usuario recebido como parametro
+	 */
 	public void adicionaUsuario(Usuario user) {
 		usuarios.add(user);
 	}
 	
+	/**
+	 * retorna usuario procurando no arrayList pelo id
+	 * 
+	 * @param . id identificador unico do usuario recebido como parametro
+	 * @return . retorna nulo caso o usuario não exista ou retorna o usuario encontrado
+	 */
 	public Usuario pesquisaUsuario(String id) {
 		for (Usuario usuario : usuarios) {
 			if (id.equals(usuario.getId()))
@@ -23,6 +34,13 @@ public class Loja {
 		return null;
 	}
 	
+	/**
+	 * adiciona dinheiro para um usuario
+	 * 
+	 * @param id
+	 * @param quantia . quantia à ser acrescentada
+	 * @throws Exception . caso o usuario não exista lança exceção
+	 */
 	public void adicionaDinheiro(String id, double quantia) throws Exception {
 		if (pesquisaUsuario(id) == null)
 			throw new Exception("O usuÃ¡rio nÃ£o existe.");
@@ -30,6 +48,16 @@ public class Loja {
 		user.addDinheiro(quantia);
 	}
 		
+	/**
+	 * vende um jogo criado para um usuario, chamando o método de compraJogo(...) do Usuário
+	 * 
+	 * @param id . identificador único do usuário
+	 * @param nomeJogo . parâmetro para ser passado para o construtor do Jogo
+	 * @param preco  . parâmetro para ser passado para o construtor do Jogo
+	 * @param jogabilidade . parâmetro para ser passado para o construtor do Jogo
+	 * @param tipo . parâmetro para ser passado para o construtor do Jogo
+	 * @throws Exception . lança exceção caso o usuário não exista
+	 */
 	public void vendeJogo(String id, String nomeJogo, double preco, HashSet<Jogabilidade> jogabilidade, Tipo tipo) throws Exception {
 		if (pesquisaUsuario(id) == null)
 			throw new Exception("O usuÃ¡rio nÃ£o existe.");
@@ -38,6 +66,12 @@ public class Loja {
 		user.compraJogo(jogo);
 	}
 	
+	/**
+	 * faz o upgrade do usuário de Noob para Veterano caso ele já tenha no mínimo 1000 de x2p
+	 * 
+	 * @param id
+	 * @throws Exception . caso o usuário não exista, ou já é veterano, ou não tem x2p suficiente (1000) lança exceção
+	 */
 	public void upgrade(String id) throws Exception {
 		if (pesquisaUsuario(id) == null)
 			throw new Exception("O usuÃ¡rio nÃ£o existe.");
@@ -71,6 +105,9 @@ public class Loja {
 		return result;
 	}
 
+	/**
+	 * duas lojas são iguais se tiverem a mesma lista de usuários
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
