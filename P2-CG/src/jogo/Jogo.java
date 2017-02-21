@@ -1,4 +1,4 @@
-package p2cg;
+package jogo;
 import java.util.HashSet;
 
 import exceptions.ParametroVazioException;
@@ -24,8 +24,8 @@ public class Jogo {
 	 * @param nome . do jogo
 	 * @param preco . do jogo
 	 * @param jogabilidade . pode ter mais de uma jogabilidade, definidas com Enum em "Jogabilidade"
-	 * @param tipo . apenas um é possível, definido com Enum em "Tipo"
-	 * @throws Exception . lança exceções para nome nulo/vazio e preco < 0
+	 * @param tipo . apenas um ï¿½ possï¿½vel, definido com Enum em "Tipo"
+	 * @throws Exception . lanï¿½a exceï¿½ï¿½es para nome nulo/vazio e preco < 0
 	 */
 	public Jogo(String nome, double preco, HashSet<Jogabilidade> jogabilidade, Tipo tipo) throws Exception {
 		if (nome == null || nome.trim().equals(""))
@@ -44,10 +44,10 @@ public class Jogo {
 	/**
 	 * registra a atual jogada feita pelo usuario no jogo this e retorna o x2p adquirido
 	 * 
-	 * @param score . pontuação na jogada atual
-	 * @param zerou . booleano, true zerou o jogo, false não zerou
+	 * @param score . pontuaï¿½ï¿½o na jogada atual
+	 * @param zerou . booleano, true zerou o jogo, false nï¿½o zerou
 	 * @return . retorna o x2p adquirido com a jogada atual
-	 * @throws Exception . lança exceção caso o jogo não foi criado ainda
+	 * @throws Exception . lanï¿½a exceï¿½ï¿½o caso o jogo nï¿½o foi criado ainda
 	 */
 	public int registraJogada(int score, boolean zerou) throws Exception {
 		if (this == null)

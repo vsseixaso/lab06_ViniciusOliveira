@@ -1,11 +1,15 @@
-package p2cg;
+package loja;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import javax.xml.crypto.dsig.spec.ExcC14NParameterSpec;
+import jogo.Jogabilidade;
+import jogo.Jogo;
+import jogo.Tipo;
+import usuario.Usuario;
+import usuario.Veterano;
 
-public class Loja {
+public class LojaController {
 
 	private static final String NL = "\n";
 	
@@ -24,7 +28,7 @@ public class Loja {
 	 * retorna usuario procurando no arrayList pelo id
 	 * 
 	 * @param . id identificador unico do usuario recebido como parametro
-	 * @return . retorna nulo caso o usuario não exista ou retorna o usuario encontrado
+	 * @return . retorna nulo caso o usuario nï¿½o exista ou retorna o usuario encontrado
 	 */
 	public Usuario pesquisaUsuario(String id) {
 		for (Usuario usuario : usuarios) {
@@ -38,8 +42,8 @@ public class Loja {
 	 * adiciona dinheiro para um usuario
 	 * 
 	 * @param id
-	 * @param quantia . quantia à ser acrescentada
-	 * @throws Exception . caso o usuario não exista lança exceção
+	 * @param quantia . quantia ï¿½ ser acrescentada
+	 * @throws Exception . caso o usuario nï¿½o exista lanï¿½a exceï¿½ï¿½o
 	 */
 	public void adicionaDinheiro(String id, double quantia) throws Exception {
 		if (pesquisaUsuario(id) == null)
@@ -49,14 +53,14 @@ public class Loja {
 	}
 		
 	/**
-	 * vende um jogo criado para um usuario, chamando o método de compraJogo(...) do Usuário
+	 * vende um jogo criado para um usuario, chamando o mï¿½todo de compraJogo(...) do Usuï¿½rio
 	 * 
-	 * @param id . identificador único do usuário
-	 * @param nomeJogo . parâmetro para ser passado para o construtor do Jogo
-	 * @param preco  . parâmetro para ser passado para o construtor do Jogo
-	 * @param jogabilidade . parâmetro para ser passado para o construtor do Jogo
-	 * @param tipo . parâmetro para ser passado para o construtor do Jogo
-	 * @throws Exception . lança exceção caso o usuário não exista
+	 * @param id . identificador ï¿½nico do usuï¿½rio
+	 * @param nomeJogo . parï¿½metro para ser passado para o construtor do Jogo
+	 * @param preco  . parï¿½metro para ser passado para o construtor do Jogo
+	 * @param jogabilidade . parï¿½metro para ser passado para o construtor do Jogo
+	 * @param tipo . parï¿½metro para ser passado para o construtor do Jogo
+	 * @throws Exception . lanï¿½a exceï¿½ï¿½o caso o usuï¿½rio nï¿½o exista
 	 */
 	public void vendeJogo(String id, String nomeJogo, double preco, HashSet<Jogabilidade> jogabilidade, Tipo tipo) throws Exception {
 		if (pesquisaUsuario(id) == null)
@@ -67,10 +71,10 @@ public class Loja {
 	}
 	
 	/**
-	 * faz o upgrade do usuário de Noob para Veterano caso ele já tenha no mínimo 1000 de x2p
+	 * faz o upgrade do usuï¿½rio de Noob para Veterano caso ele jï¿½ tenha no mï¿½nimo 1000 de x2p
 	 * 
 	 * @param id
-	 * @throws Exception . caso o usuário não exista, ou já é veterano, ou não tem x2p suficiente (1000) lança exceção
+	 * @throws Exception . caso o usuï¿½rio nï¿½o exista, ou jï¿½ ï¿½ veterano, ou nï¿½o tem x2p suficiente (1000) lanï¿½a exceï¿½ï¿½o
 	 */
 	public void upgrade(String id) throws Exception {
 		if (pesquisaUsuario(id) == null)
@@ -106,7 +110,7 @@ public class Loja {
 	}
 
 	/**
-	 * duas lojas são iguais se tiverem a mesma lista de usuários
+	 * duas lojas sï¿½o iguais se tiverem a mesma lista de usuï¿½rios
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -116,7 +120,7 @@ public class Loja {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Loja other = (Loja) obj;
+		LojaController other = (LojaController) obj;
 		if (usuarios == null) {
 			if (other.usuarios != null)
 				return false;

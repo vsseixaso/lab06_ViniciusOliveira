@@ -1,4 +1,6 @@
-package p2cg;
+package usuario;
+
+import jogo.Jogo;
 
 public abstract class Categoria {
 	

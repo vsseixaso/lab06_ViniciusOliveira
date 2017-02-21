@@ -2,8 +2,8 @@ package exceptions;
 
 public class JogoException extends Exception {
 
-	public JogoException(String string) {
-		// TODO Auto-generated constructor stub
+	public JogoException(String msg) {
+		super(msg);
 	}
 
 }

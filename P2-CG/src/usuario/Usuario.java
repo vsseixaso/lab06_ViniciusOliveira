@@ -1,6 +1,7 @@
-package p2cg;
+package usuario;
 import java.util.ArrayList;
 
+import jogo.Jogo;
 import exceptions.JogoException;
 import exceptions.ParametroVazioException;
 import exceptions.ValorException;
@@ -18,11 +19,11 @@ public class Usuario {
 	private int x2p;
 	
 	/**
-	 * cria o usuário e seta sua categoria como Noob e o dinheiro como 0
+	 * cria o usuï¿½rio e seta sua categoria como Noob e o dinheiro como 0
 	 * 
 	 * @param nome . nome do usuario
 	 * @param id . id do usuario
-	 * @throws Exception . lança exceção para nome e id nulo/vazio
+	 * @throws Exception . lanï¿½a exceï¿½ï¿½o para nome e id nulo/vazio
 	 */
 	public Usuario(String nome, String id) throws Exception {
 		if (nome == null || nome.trim().equals(""))
@@ -38,13 +39,13 @@ public class Usuario {
 	}
 	
 	/**
-	 * operação de compra de jogo, adiciona na lista do usuario, diminui do seu dinheiro o preco do jogo menos o desconto
+	 * operaï¿½ï¿½o de compra de jogo, adiciona na lista do usuario, diminui do seu dinheiro o preco do jogo menos o desconto
 	 * e adiciona x2p no seu perfil
 	 * 
-	 * @param jogo . recebe o jogo já criado
-	 * @throws Exception . lança exceção caso o usuário ja tenha o jogo ou caso não tenha dinheiro suficiente
+	 * @param jogo . recebe o jogo jï¿½ criado
+	 * @throws Exception . lanï¿½a exceï¿½ï¿½o caso o usuï¿½rio ja tenha o jogo ou caso nï¿½o tenha dinheiro suficiente
 	 */
-	protected void compraJogo(Jogo jogo) throws Exception {
+	public void compraJogo(Jogo jogo) throws Exception {
 		double preco = jogo.getPreco() - (jogo.getPreco() * categoria.getDesconto());
 		if (procuraJogo(jogo.getNome()) != null)
 			throw new JogoException("O usuÃ¡rio jÃ¡ tem esse jogo.");
@@ -56,10 +57,10 @@ public class Usuario {
 	}
 
 	/**
-	 * procura um jogo na lista de jogos do usuário
+	 * procura um jogo na lista de jogos do usuï¿½rio
 	 * 
 	 * @param nome . nome do jogo que quer encontrar
-	 * @return . retorna o jogo ou nulo (caso não exista na lista)
+	 * @return . retorna o jogo ou nulo (caso nï¿½o exista na lista)
 	 */
 	public Jogo procuraJogo(String nome) {
 		Jogo jogo = null;
@@ -71,12 +72,12 @@ public class Usuario {
 	}
 	
 	/**
-	 * registra a rodada do usuário em um determinado jogo
+	 * registra a rodada do usuï¿½rio em um determinado jogo
 	 * 
-	 * @param nomeDoJogo . nome do jogo que irá registrar a jogada
-	 * @param score . pontuação feita na rodada
-	 * @param zerou . booleano que diz se o usuário zerou o jogo (true) ou nao (false)
-	 * @throws Exception . exceção lançada pelo método chamado na classe Jogo
+	 * @param nomeDoJogo . nome do jogo que irï¿½ registrar a jogada
+	 * @param score . pontuaï¿½ï¿½o feita na rodada
+	 * @param zerou . booleano que diz se o usuï¿½rio zerou o jogo (true) ou nao (false)
+	 * @throws Exception . exceï¿½ï¿½o lanï¿½ada pelo mï¿½todo chamado na classe Jogo
 	 */
 	public void registraJogada(String nomeDoJogo, int score, boolean zerou) throws Exception {
 		Jogo jogo = procuraJogo(nomeDoJogo);

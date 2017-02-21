@@ -1,13 +1,18 @@
-package p2cg;
+package usuario;
 
 import static org.junit.Assert.*;
 
 import java.util.HashSet;
 
+import jogo.Jogabilidade;
+import jogo.Jogo;
+import jogo.Tipo;
 import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import usuario.Veterano;
 
 public class VeteranoTest {
 

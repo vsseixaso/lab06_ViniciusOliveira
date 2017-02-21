@@ -1,6 +1,10 @@
-package p2cg;
+package jogo;
 
 import java.util.HashSet;
+
+import jogo.Jogabilidade;
+import jogo.Jogo;
+import jogo.Tipo;
 
 import org.junit.Assert;
 import org.junit.Before;

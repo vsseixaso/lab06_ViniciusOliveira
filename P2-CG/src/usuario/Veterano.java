@@ -1,18 +1,20 @@
-package p2cg;
+package usuario;
+
+import jogo.Jogo;
 
 public class Veterano extends Categoria {
 
 	private static final double DESCONTO = 0.2;
 
 	/**
-	 * retorna o DESCONTO para usuários Veterano
+	 * retorna o DESCONTO para usuï¿½rios Veterano
 	 */
 	public double getDesconto() {
 		return DESCONTO;
 	}	
 	
 	/**
-	 * calcula o x2p que o usuário Veterano ganha na compra de um jogo e retorna esse valor
+	 * calcula o x2p que o usuï¿½rio Veterano ganha na compra de um jogo e retorna esse valor
 	 */
 	public int x2pCompra(Jogo jogo) {
 		int x2p;

@@ -1,4 +1,4 @@
-package p2cg;
+package loja;
 
 import static org.junit.Assert.*;
 
@@ -7,17 +7,22 @@ import java.util.HashSet;
 import org.junit.Before;
 import org.junit.Test;
 
+import usuario.Usuario;
+import jogo.Jogabilidade;
+import jogo.Jogo;
+import jogo.Tipo;
 import junit.framework.Assert;
+import loja.LojaController;
 
 public class LojaTest {
 
-	Loja loja;
+	LojaController loja;
 	Usuario user;
 	
 	@Before
 	public void inicializa() throws Exception {
-		loja = new Loja();
-		user = new Usuario("Vinícius Oliveira", "v.oliveira");
+		loja = new LojaController();
+		user = new Usuario("Vinï¿½cius Oliveira", "v.oliveira");
 	}
 	
 	@Test

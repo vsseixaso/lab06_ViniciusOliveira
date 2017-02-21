@@ -1,18 +1,20 @@
-package p2cg;
+package usuario;
+
+import jogo.Jogo;
 
 public class Noob extends Categoria {
 	
 	private static final double DESCONTO = 0.1;
 
 	/**
-	 * retorna o DESCONTO para usuários Noob
+	 * retorna o DESCONTO para usuï¿½rios Noob
 	 */
 	public double getDesconto() {
 		return DESCONTO;
 	}	
 	
 	/**
-	 * calcula o x2p que o usuário Noob ganha na compra de um jogo e retorna
+	 * calcula o x2p que o usuï¿½rio Noob ganha na compra de um jogo e retorna
 	 */
 	public int x2pCompra(Jogo jogo) {
 		int x2p;
