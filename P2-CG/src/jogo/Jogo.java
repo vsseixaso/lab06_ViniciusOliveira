@@ -1,120 +1,79 @@
 package jogo;
+
 import java.util.HashSet;
+import java.util.Set;
 
-import exceptions.ParametroVazioException;
-import exceptions.ValorNegativoException;
+import exceptions.ValorException;
+import exceptions.StringException;
 
+public abstract class Jogo {
+	public static final String FIM_DE_LINHA = System.lineSeparator();
 
-public class Jogo {
-
-	private static final String NL = "\n";
-	
 	private String nome;
 	private double preco;
-	private int bestScore;
 	private int vezesJogadas;
-	private int vezesZeradas;
-	private HashSet<Jogabilidade> jogabilidade;
-	private Tipo tipo;
-	
-	/** 
-	 * Construtor que recebe os parâmetros que definem o jogo e lança exceção para o parâmetro
-	 * 'nome' (caso esteja nulo ou vazio) e para o parâmetro 'preco' (caso seja menor que zero).
-	 * 
-	 * @param nome . do jogo
-	 * @param preco . do jogo
-	 * @param jogabilidade . pode ter mais de uma jogabilidade, definidas com Enum em "Jogabilidade"
-	 * @param tipo . apenas um � poss�vel, definido com Enum em "Tipo"
-	 * @throws Exception . lan�a exce��es para nome nulo/vazio e preco < 0
-	 */
-	public Jogo(String nome, double preco, HashSet<Jogabilidade> jogabilidade, Tipo tipo) throws Exception {
-		if (nome == null || nome.trim().equals(""))
-			throw new Exception("Nome não pode ser nulo ou vazio.");
-		if (preco < 0)
-			throw new Exception("Preço não pode ser menor que zero.");
+	private int vezesConcluidas;
+	private int maiorScore;
+	private Set<Jogabilidade> jogabilidades;
+
+	public Jogo(String nome, double preco, Set<Jogabilidade> jogabilidades)
+			throws StringException, ValorException {
+
+		if (nome == null || nome.trim().isEmpty()) {
+			throw new StringException("Nome nao pode ser nulo ou vazio.");
+		}
+		if (preco < 0) {
+			throw new ValorException("Preco nao pode ser negativo");
+		}
+
 		this.nome = nome;
 		this.preco = preco;
-		this.jogabilidade = jogabilidade;
-		this.tipo = tipo;
-		bestScore = 0;
-		vezesJogadas = 0;
-		vezesZeradas = 0;
+		this.vezesConcluidas = 0;
+		this.vezesJogadas = 0;
+		this.maiorScore = 0;
+		this.jogabilidades = jogabilidades;
 	}
-	
-	/**
-	 * registra a atual jogada feita pelo usuario no jogo this e retorna o x2p adquirido
-	 * 
-	 * @param score . pontua��o na jogada atual
-	 * @param zerou . booleano, true zerou o jogo, false n�o zerou
-	 * @return . retorna o x2p adquirido com a jogada atual
-	 * @throws Exception . lan�a exce��o caso o jogo n�o foi criado ainda
-	 */
-	public int registraJogada(int score, boolean zerou) throws Exception {
-		if (this == null)
-			throw new Exception("O jogo não foi inicializado.");
-		
-		int x2p = 0;
-		vezesJogadas++;
-		if (score > bestScore)
-			if (tipo.equals(Tipo.LUTA)) {
-				
-				if (score <= 100000) {
-					bestScore = score;
-					double x2pLutaDouble = score/1000;
-					int x2pLuta = (int) x2pLutaDouble;
-					x2p += x2pLuta;
-				}
-			} else bestScore = score;	
-			
-		if (zerou)
-			vezesZeradas++;
-			if (tipo.equals(Tipo.PLATAFORMA))
-				x2p += 20;
-		
-		if (tipo.equals(Tipo.RPG))
-			x2p += 10;
-		
-		return x2p;
-	}
+
+	public abstract int registraJogada(int score, boolean venceu);
 
 	public double getPreco() {
-		return preco;
-	}
-
-	public void setPreco(double preco) {
-		this.preco = preco;
+		return this.preco;
 	}
 
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 
-	public int getBestScore() {
-		return bestScore;
+	public int getMaiorScore() {
+		return this.maiorScore;
+	}
+
+	public void setMaiorScore(int novoScore) {
+		this.maiorScore = novoScore;
+	}
+
+	public int getvezesConcluidas() {
+		return this.vezesConcluidas;
+	}
+
+	public void setVezesConcluidas(int novaQuantidade) {
+		this.vezesConcluidas = novaQuantidade;
 	}
 
 	public int getVezesJogadas() {
-		return vezesJogadas;
+		return this.vezesJogadas;
 	}
 
-	public int getVezesZeradas() {
-		return vezesZeradas;
-	}
-
-	public HashSet<Jogabilidade> getJogabilidade() {
-		return jogabilidade;
-	}
-
-	public Tipo getTipo() {
-		return tipo;
+	public void setVezesJogadas(int novaQuantidade) {
+		this.vezesJogadas = novaQuantidade;
 	}
 
 	@Override
 	public String toString() {
-		return "+ " + nome + " - " + tipo + ":" + NL
-				+ "==> Jogou " + vezesJogadas + " vez(es)" + NL
-				+ "==> Zerou " + vezesZeradas + " vez(es)" + NL
-				+ "==> Maior score: " + bestScore + NL + NL;
+		String resultado = "==> Jogou " + getVezesJogadas() + " vez(es)" + FIM_DE_LINHA;
+		resultado += "==> Zerou " + getvezesConcluidas() + " vez(es)" + FIM_DE_LINHA;
+		resultado += "==> Maior Score: " + getMaiorScore() + FIM_DE_LINHA;
+		return resultado;
 	}
 
 	@Override
@@ -122,13 +81,12 @@ public class Jogo {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(preco);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 
-	/**
-	 * define a igualdade de jogos pelo nome e tipo
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -143,9 +101,10 @@ public class Jogo {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (tipo != other.tipo)
+		if (Double.doubleToLongBits(preco) != Double
+				.doubleToLongBits(other.preco))
 			return false;
 		return true;
 	}
-	
+
 }

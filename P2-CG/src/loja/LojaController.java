@@ -2,18 +2,26 @@ package loja;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import jogo.Jogabilidade;
 import jogo.Jogo;
-import jogo.Tipo;
+import jogo.JogoFactory;
 import usuario.Usuario;
+import usuario.UsuarioFactory;
 import usuario.Veterano;
 
 public class LojaController {
 
 	private static final String NL = "\n";
 	
-	private ArrayList<Usuario> usuarios = new ArrayList<>();
+	private UsuarioFactory userFactory;
+	private JogoFactory jogoFactory;
+	private List<Usuario> usuarios;
+	
+	public LojaController() {
+		usuarios = new ArrayList<Usuario>();
+	}
 	
 	/**
 	 * adiciona um usuario na lista de usuarios
@@ -22,6 +30,14 @@ public class LojaController {
 	 */
 	public void adicionaUsuario(Usuario user) {
 		usuarios.add(user);
+	}
+	
+	public Usuario criaUsuario(String nome, String id, String categoria) throws Exception {
+		return userFactory.criaUsuario(nome, id, categoria);
+	}
+	
+	public Jogo criaJogo(String nome, double preco, HashSet<Jogabilidade> jogabilidade) {
+		return jogoFactory.criaJogo(nome, preco, jogabilidade);
 	}
 	
 	/**
@@ -62,11 +78,11 @@ public class LojaController {
 	 * @param tipo . par�metro para ser passado para o construtor do Jogo
 	 * @throws Exception . lan�a exce��o caso o usu�rio n�o exista
 	 */
-	public void vendeJogo(String id, String nomeJogo, double preco, HashSet<Jogabilidade> jogabilidade, Tipo tipo) throws Exception {
+	public void vendeJogo(String id, String nomeJogo, double preco, HashSet<Jogabilidade> jogabilidade) throws Exception {
 		if (pesquisaUsuario(id) == null)
 			throw new Exception("O usuário não existe.");
 		Usuario user = pesquisaUsuario(id);
-		Jogo jogo = new Jogo(nomeJogo, preco, jogabilidade, tipo);
+		Jogo jogo = new Jogo(nomeJogo, preco, jogabilidade);
 		user.compraJogo(jogo);
 	}
 	
