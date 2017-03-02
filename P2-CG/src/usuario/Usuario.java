@@ -3,13 +3,13 @@ import java.util.ArrayList;
 
 import jogo.Jogo;
 import exceptions.JogoException;
-import exceptions.ParametroVazioException;
+import exceptions.StringException;
 import exceptions.ValorException;
 import exceptions.ValorNegativoException;
 
 public class Usuario {
 
-	private static final String NL = "\n";
+	private static final String NL = System.lineSeparator();
 	
 	private String nome;
 	private String id;
@@ -27,9 +27,9 @@ public class Usuario {
 	 */
 	public Usuario(String nome, String id) throws Exception {
 		if (nome == null || nome.trim().equals(""))
-			throw new ParametroVazioException("Nome do usuário não pode ser nulo ou vazio.");
+			throw new StringException("Nome do usuário não pode ser nulo ou vazio.");
 		if (id == null || id.trim().equals(""))
-			throw new ParametroVazioException("ID do usuário não pode ser nulo ou vazio.");
+			throw new StringException("ID do usuário não pode ser nulo ou vazio.");
 		this.nome = nome;
 		this.id = id;
 		categoria = new Noob();
