@@ -34,7 +34,7 @@ public abstract class Jogo {
 		this.jogabilidades = jogabilidades;
 	}
 
-	public abstract int registraJogada(int score, boolean venceu);
+	public abstract int registraJogada(int score, boolean venceu); // chamada polimórfica
 
 	public double getPreco() {
 		return this.preco;

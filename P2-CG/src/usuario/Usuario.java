@@ -53,7 +53,7 @@ public class Usuario {
 			throw new ValorException("Dinheiro insuficiente para comprar esse jogo.");
 		jogos.add(jogo);
 		dinheiro -= preco;
-		x2p += categoria.x2pCompra(jogo);
+		x2p += categoria.x2pCompra(jogo); // chamada polimórfica
 	}
 
 	/**
@@ -74,13 +74,13 @@ public class Usuario {
 	public void recompensar(String nomeJogo, int scoreObtido, boolean zerou) {
 		Jogo jogo = procuraJogo(nomeJogo);
 		x2p += (jogo.registraJogada(scoreObtido, zerou));
-		x2p += categoria.recompensar(jogo, scoreObtido, zerou);		
+		x2p += categoria.recompensar(jogo, scoreObtido, zerou);	// chamada polimórfica
 	}
 	
 	public void punir(String nomeJogo, int scoreObtido, boolean zerou) {
 		Jogo jogo = procuraJogo(nomeJogo);
 		x2p += (jogo.registraJogada(scoreObtido, zerou));
-		x2p += categoria.punir(jogo, scoreObtido, zerou);
+		x2p += categoria.punir(jogo, scoreObtido, zerou); // chamada polimórfica
 	}
 	
 	public String getNome() {
@@ -142,7 +142,8 @@ public class Usuario {
 	@Override
 	public String toString() {
 		String stringCompleta = id + NL + nome + " - Jogador "
-				+ categoria.toString() + NL	+ "Lista de Jogos:" + NL;		
+				+ categoria.toString() // chamada polimórfica
+				+ NL	+ "Lista de Jogos:" + NL;		
 		
 		for (Jogo jogo : jogos) {
 			stringCompleta += jogo.toString();
