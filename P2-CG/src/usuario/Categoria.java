@@ -2,10 +2,14 @@ package usuario;
 
 import jogo.Jogo;
 
-public abstract class Categoria {
+public interface Categoria {
 	
-	public abstract int x2pCompra(Jogo jogo);
+	public int x2pCompra(Jogo jogo);
 
-	public abstract double getDesconto();
+	public double getDesconto();
+
+	public int punir(Jogo jogo, int scoreObtido, boolean zerou);
+
+	public int recompensar(Jogo jogo, int scoreObtido, boolean zerou);
 	
 }

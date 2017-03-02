@@ -1,5 +1,6 @@
 package jogo;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import exceptions.ValorException;
@@ -7,19 +8,18 @@ import exceptions.StringException;
 
 public class Luta extends Jogo{
 	
-	public Luta (String nome, double preco, Set<Jogabilidade> jogabilidades) throws StringException, ValorException {
+	public Luta (String nome, double preco, HashSet<Jogabilidade> jogabilidades) throws StringException, ValorException {
 		super(nome, preco, jogabilidades);
 	}
 	
 	@Override
 	public int registraJogada(int score, boolean venceu) {
 		setVezesJogadas(getVezesJogadas()+ 1);
-		if(score > this.getMaiorScore()){
+		if (score > this.getMaiorScore()) {
 			setMaiorScore(score);
 		}
-		if(venceu){
+		if (venceu) {
 			setVezesConcluidas(getvezesConcluidas() + 1);
-			
 		}
 		return score/1000;
 	}

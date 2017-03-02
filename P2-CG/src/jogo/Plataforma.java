@@ -1,15 +1,17 @@
 package jogo;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import exceptions.ValorException;
 import exceptions.StringException;
 
 public class Plataforma extends Jogo {
+
 	public final static int MAXIMUM_SCORE = 100000;
 	public final static int TAXA_XP2 = 20;
 
-	public Plataforma(String nome, double preco, Set<Jogabilidade> jogabilidades) throws ValorException, StringException {
+	public Plataforma(String nome, double preco, HashSet<Jogabilidade> jogabilidades) throws ValorException, StringException {
 		super(nome, preco, jogabilidades);
 	}
 

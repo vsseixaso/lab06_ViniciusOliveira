@@ -9,6 +9,7 @@ import exceptions.ValorException;
 import jogo.Jogabilidade;
 import jogo.Jogo;
 import jogo.JogoFactory;
+import usuario.Noob;
 import usuario.Usuario;
 import usuario.UsuarioFactory;
 import usuario.Veterano;
@@ -104,7 +105,18 @@ public class LojaController {
 			throw new Exception("O usuário já é Veterano.");
 		if (user.getX2p() < 1000)
 			throw new Exception("O usuário não tem x2p suficiente.");
-		user.setCategoria();
+		user.upgrade();
+	}
+	
+	public void downgrade(String id) throws Exception {
+		if (pesquisaUsuario(id) == null)
+			throw new Exception("O usuário não existe.");
+		Usuario user = pesquisaUsuario(id);
+		if (user.getCategoria() instanceof Noob)
+			throw new Exception("O usuário já é Noob.");
+		if (user.getX2p() > 1000)
+			throw new Exception("O usuário não tem x2p suficiente.");
+		user.downgrade();
 	}
 
 	public ArrayList<Usuario> getUsuarios() {

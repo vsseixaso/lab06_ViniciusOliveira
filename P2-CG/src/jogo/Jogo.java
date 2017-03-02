@@ -1,5 +1,6 @@
 package jogo;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import exceptions.ValorException;
@@ -15,7 +16,7 @@ public abstract class Jogo {
 	private int maiorScore;
 	private Set<Jogabilidade> jogabilidades;
 
-	public Jogo(String nome, double preco, Set<Jogabilidade> jogabilidades)
+	public Jogo(String nome, double preco, HashSet<Jogabilidade> jogabilidades)
 			throws StringException, ValorException {
 
 		if (nome == null || nome.trim().isEmpty()) {
@@ -65,6 +66,14 @@ public abstract class Jogo {
 
 	public void setVezesJogadas(int novaQuantidade) {
 		this.vezesJogadas = novaQuantidade;
+	}
+
+	public Set<Jogabilidade> getJogabilidades() {
+		return jogabilidades;
+	}
+
+	public void setJogabilidades(Set<Jogabilidade> jogabilidades) {
+		this.jogabilidades = jogabilidades;
 	}
 
 	@Override

@@ -1,11 +1,11 @@
 package usuario;
+
 import java.util.ArrayList;
 
 import jogo.Jogo;
 import exceptions.JogoException;
 import exceptions.StringException;
 import exceptions.ValorException;
-import exceptions.ValorNegativoException;
 
 public class Usuario {
 
@@ -71,17 +71,16 @@ public class Usuario {
 		return jogo;
 	}
 	
-	/**
-	 * registra a rodada do usu�rio em um determinado jogo
-	 * 
-	 * @param nomeDoJogo . nome do jogo que ir� registrar a jogada
-	 * @param score . pontua��o feita na rodada
-	 * @param zerou . booleano que diz se o usu�rio zerou o jogo (true) ou nao (false)
-	 * @throws Exception . exce��o lan�ada pelo m�todo chamado na classe Jogo
-	 */
-	public void registraJogada(String nomeDoJogo, int score, boolean zerou) throws Exception {
-		Jogo jogo = procuraJogo(nomeDoJogo);
-		x2p += (jogo.registraJogada(score, zerou));
+	public void recompensar(String nomeJogo, int scoreObtido, boolean zerou) {
+		Jogo jogo = procuraJogo(nomeJogo);
+		x2p += (jogo.registraJogada(scoreObtido, zerou));
+		x2p += categoria.recompensar(jogo, scoreObtido, zerou);		
+	}
+	
+	public void punir(String nomeJogo, int scoreObtido, boolean zerou) {
+		Jogo jogo = procuraJogo(nomeJogo);
+		x2p += (jogo.registraJogada(scoreObtido, zerou));
+		x2p += categoria.punir(jogo, scoreObtido, zerou);
 	}
 	
 	public String getNome() {
@@ -116,8 +115,12 @@ public class Usuario {
 		return categoria;
 	}
 
-	public void setCategoria() {
+	public void upgrade() {
 		this.categoria = new Veterano();
+	}
+	
+	public void downgrade() {
+		this.categoria = new Noob();
 	}
 
 	public int getX2p() {

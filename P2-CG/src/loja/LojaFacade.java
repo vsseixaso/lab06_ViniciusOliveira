@@ -43,6 +43,10 @@ public class LojaFacade {
 		lojaController.upgrade(id);
 	}
 	
+	public void downgrade(String id) throws Exception {
+		lojaController.downgrade(id);
+	}
+	
 	public ArrayList<Usuario> getUsuarios() {
 		return lojaController.getUsuarios();
 	}
